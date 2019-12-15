@@ -1,0 +1,11 @@
+{
+  "mappings": {
+    "properties": {
+      "default_field":{
+       "MovieID":{ "type": "integer" },  
+       "Title": { "type": "text" }, 
+       "Genres":{ "type": "text" }
+      }
+    }
+  }
+}

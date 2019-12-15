@@ -1,0 +1,12 @@
+{
+    "mappings": {
+      "properties": {
+        "UserID":{"type":"integer"},
+        "MovieID":{ "type": "integer" },  
+        "rating":{"type":"float"},
+        "timestamp":{"type":"time"}  
+      }
+    }
+  }
+  
+  
