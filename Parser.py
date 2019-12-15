@@ -28,11 +28,11 @@ FilePath = open('movies.json')
 #Connect to elasticsearch
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 #Test connection to local server
-if es.ping():print('success!')
+if es.ping():print('connection success!')
 else:print('ping failed')
 #deletes index/testing
-es.indices.delete(index='movies', ignore=[400, 404])
-es.indices.delete(index='ratings', ignore=[400, 404])
+#es.indices.delete(index='movies', ignore=[400, 404])
+#es.indices.delete(index='ratings', ignore=[400, 404])
 def CreateIndex(indexname,type,files):
     directory = '/mnt/c/Users/Eric/Desktop/IR-Project-master'
     i = 1
@@ -49,5 +49,5 @@ def CSV2ES(filename,indexname,type):
         helpers.bulk(es, r, index=indexname, doc_type=type)
 CreateIndex('movies','movies','movies.mapping.json')
 CSV2ES('movies.csv','movies','movies')
-CreateIndex('ratings','ratings','rating.mapping.json')
+CreateIndex('ratings','ratings','ratings.mapping.json')
 CSV2ES('ratings.csv','ratings','ratings')
