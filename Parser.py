@@ -26,7 +26,7 @@ FilePath = open('movies.json')
 
 '''
 #Connect to elasticsearch
-es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+es = Elasticsearch(['https://site:a8eea5bd2dae91cdaecb6d4479720e6f@gimli-eu-west-1.searchly.com'])
 #Test connection to local server
 if es.ping():print('connection success!')
 else:print('ping failed')
@@ -41,7 +41,7 @@ def CreateIndex(indexname,type,files):
             f = open(filename)
             Config_File = f.read()
             # Send the data into es
-            es.index(index=indexname, ignore=400, doc_type=type, id=i,body=json.loads(Config_File))
+            es.indices.create(index = 'example_index', ignore = 400,body=json.loads(Config_File))
             i = i + 1
 def CSV2ES(filename,indexname,type):
     with open(filename) as doc:

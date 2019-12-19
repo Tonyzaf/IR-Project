@@ -12,7 +12,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 #Connect to elasticsearch
-es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+es = Elasticsearch(['https://site:a8eea5bd2dae91cdaecb6d4479720e6f@gimli-eu-west-1.searchly.com'])
 #Test connection to local server
 if es.ping():print('connection success!')
 else:print('ping failed')
