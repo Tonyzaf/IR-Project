@@ -8,8 +8,8 @@ from elasticsearch import helpers
 from elasticsearch.serializer import JSONSerializer
 import os
 import sys
-reload(sys)
-sys.setdefaultencoding("utf-8")
+import importlib
+importlib.reload (sys)
 '''
 # Convert CSV to JSON
 f = open('movies.csv')  
@@ -33,21 +33,11 @@ else:print('ping failed')
 #deletes index/testing
 #es.indices.delete(index='movies', ignore=[400, 404])
 #es.indices.delete(index='ratings', ignore=[400, 404])
-def CreateIndex(indexname,type,files):
-    directory = '/mnt/c/Users/Eric/Desktop/IR-Project-master'
-    i = 1
-    for filename in os.listdir(directory):
-        if filename.endswith(files):
-            f = open(filename)
-            Config_File = f.read()
-            # Send the data into es
-            es.indices.create(index = 'example_index', ignore = 400,body=json.loads(Config_File))
-            i = i + 1
 def CSV2ES(filename,indexname,type):
     with open(filename) as doc:
         r = csv.DictReader(doc)
         helpers.bulk(es, r, index=indexname, doc_type=type)
-CreateIndex('movies','movies','movies.mapping.json')
+es.indices.create(index = 'movies')
 CSV2ES('movies.csv','movies','movies')
-CreateIndex('ratings','ratings','ratings.mapping.json')
+es.indices.create(index = 'ratings')
 CSV2ES('ratings.csv','ratings','ratings')
